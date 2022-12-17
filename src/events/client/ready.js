@@ -1,3 +1,4 @@
+const chalk = require('chalk');
 const { ActivityType } = require("discord.js");
 
 module.exports = {
@@ -5,6 +6,6 @@ module.exports = {
   once: true,
   async execute(client) {
     setInterval(client.pickPresence, 10 * 1000);
-    console.log(`Ready with user: ${client.user.tag}`);
+    console.log(chalk.green(`[Bot Status] Ready with user: ${client.user.tag}`));
   },
 };
