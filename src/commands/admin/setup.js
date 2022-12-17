@@ -25,6 +25,7 @@ module.exports = {
       .setCustomId("ticket-type")
       .setMinValues(1)
       .setMaxValues(1)
+      .setPlaceholder("None")
       .setOptions(
         new StringSelectMenuOptionBuilder({
           label: "🎟️ Support Tickets",

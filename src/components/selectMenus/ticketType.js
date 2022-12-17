@@ -22,8 +22,9 @@ module.exports = {
       .addFields(
         { name: "1. Ticket Type", value: ticketType, inline: true },
         { name: "2. Embed Channel", value: "None", inline: true },
-        { name: "3. Ticket Title", value: "None", inline: true },
-        { name: "4. Ticket Text", value: "None", inline: true },
+        { name: "3. Embed Title", value: "None", inline: true },
+        { name: "4. Embed Text", value: "None", inline: true },
+        { name: "5. Support Roles", value: "None", inline: true },
         { name: "6. Ticket Category", value: "None", inline: true },
         { name: "7. Closing Category", value: "None", inline: true }
       );
@@ -36,6 +37,7 @@ module.exports = {
       .setCustomId("channels")
       .setMinValues(1)
       .setMaxValues(1)
+      .setPlaceholder("None")
       .setChannelTypes(ChannelType.GuildText);
 
     let setupProfile = await setup.findOne({

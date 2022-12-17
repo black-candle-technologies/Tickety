@@ -18,12 +18,6 @@ module.exports = {
   },
   async execute(interaction, client) {
     const channel = interaction.values[0];
-    const infoEmbed = interaction.message.embeds[0];
-    infoEmbed.fields[1] = {
-      name: "2. Embed Channel",
-      value: channel,
-      inline: true,
-    };
 
     const modal = new ModalBuilder()
       .setTitle("Embed Information")
@@ -52,6 +46,7 @@ module.exports = {
       guildId: interaction.guild.id,
       userId: interaction.user.id,
     });
+
     if (!setupProfile)
       return interaction.update({
         embeds: [],
@@ -59,6 +54,7 @@ module.exports = {
         content:
           "An error occured, please try again. If this error persists, please contact the bot developer.",
       });
+      
     setupProfile.embedChannel = channel;
     setupProfile.save();
 
