@@ -3,7 +3,7 @@ const Ticket = require("../../schemas/ticket");
 const ticketGroup = require("../../schemas/ticketgroup");
 
 module.exports = (client) => {
-  client.closeTicket = async (interaction, client) => {
+  client.functions.tickets.closeTicket = async (interaction, client) => {
     let channel = interaction.channel;
     await interaction.deferReply({
       fetchReply: true,

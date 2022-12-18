@@ -3,6 +3,6 @@ module.exports = {
     name: "open-ticket",
   },
   async execute(interaction, client) {
-    client.createTicket(interaction, client);
+    client.functions.tickets.openTicket(interaction, client);
   },
 };

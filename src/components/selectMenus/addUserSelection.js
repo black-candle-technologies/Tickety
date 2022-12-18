@@ -3,6 +3,6 @@ module.exports = {
     name: "add-user-selection",
   },
   async execute(interaction, client) {
-    client.addUserToTicket(interaction, client);
+    client.functions.tickets.addUser(interaction, client);
   },
 };

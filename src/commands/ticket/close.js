@@ -5,6 +5,6 @@ module.exports = {
         .setName('close')
         .setDescription('Close a ticket!'),
     async execute(interaction, client) {
-        client.closeTicket(interaction, client);
+        client.functions.tickets.closeTicket(interaction, client);
     }
 }

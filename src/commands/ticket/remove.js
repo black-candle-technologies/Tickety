@@ -5,6 +5,6 @@ module.exports = {
         .setName('remove')
         .setDescription('Remove a user from the ticket!'),
     async execute(interaction, client) {
-        client.pickUserToRemoveFromTicket(interaction, client);
+        client.functions.tickets.selectUserToRemove(interaction, client);
     }
 }

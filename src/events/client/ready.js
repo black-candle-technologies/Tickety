@@ -5,7 +5,7 @@ module.exports = {
   name: "ready",
   once: true,
   async execute(client) {
-    setInterval(client.pickPresence, 10 * 1000);
+    setInterval(client.functions.pickPresence, 10 * 1000);
     console.log(chalk.green(`[Bot Status] Ready with user: ${client.user.tag}`));
   },
 };

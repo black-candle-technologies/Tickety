@@ -2,7 +2,7 @@ const chalk = require("chalk");
 const fs = require("fs");
 
 module.exports = (client) => {
-  client.handleComponents = async () => {
+  client.functions.handleComponents = async () => {
     const componentFolders = fs.readdirSync("./src/components");
     componentFolders.forEach((folder) => {
       if (folder.startsWith("#")) return;

@@ -2,7 +2,7 @@ const { ActivityType } = require("discord.js");
 const Ticket = require('../../schemas/ticket')
 
 module.exports = (client) => {
-  client.pickPresence = async () => {
+  client.functions.pickPresence = async () => {
     const options = [
       {
         type: ActivityType.Watching,

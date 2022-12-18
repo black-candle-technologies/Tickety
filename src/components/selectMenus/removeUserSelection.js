@@ -3,6 +3,6 @@ module.exports = {
     name: "remove-user-selection",
   },
   async execute(interaction, client) {
-    client.removeUserFromTicket(interaction, client);
+    client.functions.tickets.removeUser(interaction, client);
   },
 };

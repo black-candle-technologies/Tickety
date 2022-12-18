@@ -5,6 +5,6 @@ module.exports = {
         .setName('add')
         .setDescription('Add a user to the ticket!'),
     async execute(interaction, client) {
-        client.pickUserToAddToTicket(interaction, client);
+        client.functions.tickets.selectUserToAdd(interaction, client);
     }
 }

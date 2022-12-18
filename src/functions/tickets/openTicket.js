@@ -11,7 +11,7 @@ const Ticket = require("../../schemas/ticket");
 const { default: mongoose } = require("mongoose");
 
 module.exports = (client) => {
-  client.createTicket = async (interaction, client) => {
+  client.functions.tickets.openTicket = async (interaction, client) => {
     let guildTickets = await ticketGroup.findOne({
       guildId: interaction.guild.id,
       channelId: interaction.channel.id,

@@ -16,18 +16,6 @@ module.exports = {
     name: "create-closing-category",
   },
   async execute(interaction, client) {
-    const guild = interaction.guild;
-    const category = await guild.channels.create({
-      type: ChannelType.GuildCategory,
-      name: "Closed Tickets",
-      permissionOverwrites: [
-        {
-          id: guild.roles.everyone.id,
-          deny: [PermissionFlagsBits.ViewChannel],
-        },
-      ],
-    });
-
     let setupProfile = await setup.findOne({
       guildId: interaction.guild.id,
       userId: interaction.user.id,
@@ -40,6 +28,22 @@ module.exports = {
         content:
           "An error occured, please try again. If this error persists, please contact the bot developer.",
       });
+    
+    const guild = interaction.guild;
+    const category = await guild.channels.create({
+      type: ChannelType.GuildCategory,
+      name: "Closed Tickets",
+      permissionOverwrites: [
+        {
+          id: guild.roles.everyone.id,
+          deny: [PermissionFlagsBits.ViewChannel],
+        },
+        {
+          id: setupProfile.supportRole,
+          allow: [PermissionFlagsBits.ViewChannel]
+        }
+      ],
+    });
 
     setupProfile.ticketClosingCategory = category.id;
     setupProfile.save();

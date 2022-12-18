@@ -5,7 +5,7 @@ const { Routes } = require("discord-api-types/v9");
 const fs = require("fs");
 
 module.exports = (client) => {
-  client.handleCommands = async () => {
+  client.functions.handleCommands = async () => {
     const commandFolders = fs.readdirSync("./src/commands");
     commandFolders.forEach((folder) => {
       if (folder.startsWith("#")) return;

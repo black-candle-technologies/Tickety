@@ -16,6 +16,9 @@ client.cancelButton = new ButtonBuilder()
   .setLabel("❌ Cancel")
   .setStyle(ButtonStyle.Danger);
 
+client.functions = new Object();
+client.functions.setup = new Object();
+client.functions.tickets = new Object();
 client.buttons = new Collection();
 client.selectMenus = new Collection();
 client.modals = new Collection();
@@ -32,9 +35,9 @@ functionFolders.forEach((folder) => {
   );
 });
 
-client.handleEvents();
-client.handleCommands();
-client.handleComponents();
+client.functions.handleEvents();
+client.functions.handleCommands();
+client.functions.handleComponents();
 (async () => {
   await connect(databaseToken).catch(console.error);
   client.login(token);

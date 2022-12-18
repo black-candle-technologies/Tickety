@@ -3,7 +3,7 @@ const fs = require("fs");
 const { connection } = require("mongoose");
 
 module.exports = (client) => {
-  client.handleEvents = async () => {
+  client.functions.handleEvents = async () => {
     const eventFolders = fs.readdirSync(`./src/events`);
     eventFolders.forEach((folder) => {
       const eventFiles = fs

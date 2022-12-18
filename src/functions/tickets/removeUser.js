@@ -7,7 +7,7 @@ const {
 const { PermissionFlagsBits } = require("discord.js");
 
 module.exports = (client) => {
-  client.pickUserToRemoveFromTicket = async (interaction, client) => {
+  client.functions.tickets.selectUserToRemove = async (interaction, client) => {
     let channel = interaction.channel;
     let ticket = await Ticket.findOne({
       guildId: channel.guild.id,
@@ -45,7 +45,7 @@ module.exports = (client) => {
     });
   };
 
-  client.removeUserFromTicket = async (interaction, client) => {
+  client.functions.tickets.removeUser = async (interaction, client) => {
     const user = interaction.values[0];
     let channel = interaction.channel;
     let ticket = await Ticket.findOne({
