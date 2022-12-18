@@ -13,7 +13,7 @@ module.exports = {
     .setDescription("Setup your server to use Tickety!")
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   async execute(interaction, client) {
-    let message = await interaction.deferReply({
+    await interaction.deferReply({
       fetchReply: true,
       ephemeral: true,
     });

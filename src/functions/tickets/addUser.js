@@ -70,7 +70,7 @@ module.exports = (client) => {
     ticket.save();
 
     let member = channel.guild.members.cache.find(member => member.id === user);
-    channel = await channel.permissionOverwrites.create(member, {
+    await channel.permissionOverwrites.create(member, {
       ViewChannel: true
     });
 

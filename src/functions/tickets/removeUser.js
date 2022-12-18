@@ -77,7 +77,7 @@ module.exports = (client) => {
         ephemeral: true,
       });
 
-    for (x in ticket.addedUsers) {
+    for (const x in ticket.addedUsers) {
       if (ticket.addedUsers[x] == user)
         ticket.addedUsers = ticket.addedUsers.filter(
           (e) => e !== ticket.addedUsers[x]
@@ -89,7 +89,7 @@ module.exports = (client) => {
       (member) => member.id === user
     );
 
-    channel = await channel.permissionOverwrites.create(member, {
+    await channel.permissionOverwrites.create(member, {
       ViewChannel: false,
     });
 

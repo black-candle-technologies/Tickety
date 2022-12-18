@@ -22,6 +22,7 @@ module.exports = (client) => {
                 event.execute(...args, client)
               );
           });
+          break;
         case "mongo":
           eventFiles.forEach((file) => {
             const event = require(`../../events/${folder}/${file}`);
