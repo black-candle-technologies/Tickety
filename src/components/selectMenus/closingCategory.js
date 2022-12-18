@@ -51,15 +51,33 @@ module.exports = {
         .setCustomId("open-ticket")
         .setEmoji("🎟️");
     const embedChannel = interaction.guild.channels.cache.find(channel => channel.id === setupProfile.embedChannel);
+
+    let ticketSchema = await ticketGroup.findOne({
+        guildId: interaction.guild.id,
+        channelId: interaction.channel.id
+    });
+
+    if(!ticketSchema) ticketSchema = await new ticketGroup({
+        _id: mongoose.Types.ObjectId(),
+        guildId: interaction.guild.id,
+        channelId: interaction.channel.id
+    });
+
+    ticketSchema.supportRole = setupProfile.supportRole;
+    ticketSchema.ticketCategory = setupProfile.ticketCategory;
+    ticketSchema.closingCategory = setupProfile.ticketClosingCategory;
+    ticketSchema.openTickets = [];
+    ticketSchema.closedTickets = [];
+    ticketSchema.save();
+
     embedChannel.send({
         embeds: [ ticketEmbed ],
         components: [ new ActionRowBuilder().addComponents(ticketButton) ]
     });
 
-    // collect all info and use
     interaction.update({
-      content: "You've made it through the setup process!",
-      embeds: [infoEmbed],
+      content: "Congratulations, you've made it through the setup process!",
+      embeds: [ infoEmbed ],
       components: [],
     });
   },

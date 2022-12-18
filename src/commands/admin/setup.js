@@ -4,12 +4,14 @@ const {
   ActionRowBuilder,
   StringSelectMenuBuilder,
   StringSelectMenuOptionBuilder,
+  PermissionFlagsBits,
 } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("setup")
-    .setDescription("Setup your server to use Tickety!"),
+    .setDescription("Setup your server to use Tickety!")
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   async execute(interaction, client) {
     let message = await interaction.deferReply({
       fetchReply: true,

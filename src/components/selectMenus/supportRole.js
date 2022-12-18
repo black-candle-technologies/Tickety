@@ -19,7 +19,6 @@ module.exports = {
     name: "support-role",
   },
   async execute(interaction, client) {
-    console.log('test');
     const setupProfile = await setup.findOne({
       guildId: interaction.guild.id,
       userId: interaction.user.id,
@@ -33,7 +32,7 @@ module.exports = {
           "An error occured, please try again. If this error persists, please contact the bot developer.",
       });
 
-    setupProfile.supportRoles = interaction.values[0];
+    setupProfile.supportRole = interaction.values[0];
     setupProfile.save();
 
     const role = interaction.guild.roles.cache.find(role => role.id === interaction.values[0]);

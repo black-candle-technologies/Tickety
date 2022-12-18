@@ -7,7 +7,7 @@ const setupSchema = new Schema({
   embedChannel: { type: String, require: false },
   embedTitle: { type: String, require: false },
   embedText: { type: String, require: false },
-  supportRoles: { type: String, require:false },
+  supportRole: { type: String, require:false },
   ticketCategory: { type: String, require: false},
   ticketClosingCategory: { type: String, require: false }
 });

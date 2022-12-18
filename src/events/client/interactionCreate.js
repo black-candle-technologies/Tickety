@@ -31,7 +31,12 @@ module.exports = {
       } catch (error) {
         console.error(error);
       }
-    } else if (interaction.isStringSelectMenu() || interaction.isChannelSelectMenu() || interaction.isRoleSelectMenu()) {
+    } else if (
+      interaction.isStringSelectMenu() ||
+      interaction.isChannelSelectMenu() ||
+      interaction.isRoleSelectMenu() ||
+      interaction.isUserSelectMenu()
+    ) {
       const { selectMenus } = client;
       const { customId } = interaction;
       const menu = selectMenus.get(customId);

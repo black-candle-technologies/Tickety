@@ -1,4 +1,14 @@
-const { ChannelType, messageLink, PermissionFlagsBits, EmbedBuilder, ButtonBuilder, ButtonStyle, ChannelSelectMenuBuilder, ActionRow, ActionRowBuilder } = require("discord.js");
+const {
+  ChannelType,
+  messageLink,
+  PermissionFlagsBits,
+  EmbedBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  ChannelSelectMenuBuilder,
+  ActionRow,
+  ActionRowBuilder,
+} = require("discord.js");
 const setup = require("../../schemas/setup");
 
 module.exports = {
@@ -7,16 +17,6 @@ module.exports = {
   },
   async execute(interaction, client) {
     const guild = interaction.guild;
-    const category = await guild.channels.create({
-      type: ChannelType.GuildCategory,
-      name: "Tickets",
-      permissionOverwrites: [
-        {
-          id: guild.roles.everyone.id,
-          deny: [PermissionFlagsBits.ViewChannel],
-        },
-      ],
-    });
 
     let setupProfile = await setup.findOne({
       guildId: interaction.guild.id,
@@ -30,6 +30,21 @@ module.exports = {
         content:
           "An error occured, please try again. If this error persists, please contact the bot developer.",
       });
+
+    const category = await guild.channels.create({
+      type: ChannelType.GuildCategory,
+      name: "Tickets",
+      permissionOverwrites: [
+        {
+          id: guild.roles.everyone.id,
+          deny: [PermissionFlagsBits.ViewChannel],
+        },
+        {
+          id: setupProfile.supportRole,
+          allow: [PermissionFlagsBits.ViewChannel],
+        },
+      ],
+    });
 
     setupProfile.ticketCategory = category.id;
     setupProfile.save();
@@ -56,15 +71,16 @@ module.exports = {
       .setCustomId("create-closing-category")
       .setStyle(ButtonStyle.Success)
       .setLabel("Create one for me!");
-    
-    interaction.update({
-        embeds: [ infoEmbed, closingCategoryEmbed ],
-        components: [
-            new ActionRowBuilder().addComponents(ticketCategorySelector),
-            new ActionRowBuilder().addComponents(ticketCategoryButton, client.cancelButton)
-        ]
-    });
 
-    
+    interaction.update({
+      embeds: [infoEmbed, closingCategoryEmbed],
+      components: [
+        new ActionRowBuilder().addComponents(ticketCategorySelector),
+        new ActionRowBuilder().addComponents(
+          ticketCategoryButton,
+          client.cancelButton
+        ),
+      ],
+    });
   },
 };

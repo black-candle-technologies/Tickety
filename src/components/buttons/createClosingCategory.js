@@ -1,5 +1,15 @@
-const { ChannelType, messageLink, PermissionFlagsBits, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
+const {
+  ChannelType,
+  messageLink,
+  PermissionFlagsBits,
+  EmbedBuilder,
+  ButtonBuilder,
+  ActionRowBuilder,
+  ButtonStyle,
+} = require("discord.js");
 const setup = require("../../schemas/setup");
+const ticketGroup = require("../../schemas/ticketgroup");
+const { default: mongoose, set } = require("mongoose");
 
 module.exports = {
   data: {
@@ -42,17 +52,41 @@ module.exports = {
     };
 
     const ticketEmbed = new EmbedBuilder()
-        .setTitle(setupProfile.embedTitle)
-        .setDescription(setupProfile.embedText);
+      .setTitle(setupProfile.embedTitle)
+      .setDescription(setupProfile.embedText);
+
     const ticketButton = new ButtonBuilder()
-        .setLabel("Open a ticket!")
-        .setCustomId("open-ticket")
-        .setStyle(ButtonStyle.Success)
-        .setEmoji("🎟️");
-    const embedChannel = interaction.guild.channels.cache.find(channel => channel.id === setupProfile.embedChannel);
+      .setLabel("Open a ticket!")
+      .setCustomId("open-ticket")
+      .setStyle(ButtonStyle.Success)
+      .setEmoji("🎟️");
+
+    const embedChannel = interaction.guild.channels.cache.find(
+      (channel) => channel.id === setupProfile.embedChannel
+    );
+
+    let ticketSchema = await ticketGroup.findOne({
+      guildId: interaction.guild.id,
+      channelId: setupProfile.embedChannel,
+    });
+
+    if (!ticketSchema)
+      ticketSchema = await new ticketGroup({
+        _id: mongoose.Types.ObjectId(),
+        guildId: interaction.guild.id,
+        channelId: setupProfile.embedChannel,
+      });
+
+    ticketSchema.supportRole = setupProfile.supportRole;
+    ticketSchema.ticketCategory = setupProfile.ticketCategory;
+    ticketSchema.closingCategory = setupProfile.ticketClosingCategory;
+    ticketSchema.openTickets = [];
+    ticketSchema.closedTickets = [];
+    ticketSchema.save();
+
     embedChannel.send({
-        embeds: [ ticketEmbed ],
-        components: [ new ActionRowBuilder().addComponents(ticketButton) ]
+      embeds: [ticketEmbed],
+      components: [new ActionRowBuilder().addComponents(ticketButton)],
     });
 
     interaction.update({
