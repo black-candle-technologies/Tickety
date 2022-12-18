@@ -1,0 +1,2 @@
+# Tickety
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=black-candle-technologies_tickety&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=black-candle-technologies_tickety)
