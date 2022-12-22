@@ -1,0 +1,5 @@
+{
+    "name": "tickets",
+    "description": "An advanced ticket handler",
+    "entry": "Tickets"
+}
